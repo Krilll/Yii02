@@ -16,7 +16,34 @@ return [
         'request' => [
             'csrfParam' => '_csrf-backend',
         ],
+        /*
+         * 'components' => array(
+    ...
+    'user'=>array(
+        ...
+        'identityCookie' => array('domain' => '.mydomain.com', //note dot before domain name
+        // identityCookie same as "session->cookieParams->domain"
+    ),
+    'session' => array(
+        'autoStart'=>true,
+        'cookieParams' => array('domain' => '.mydomain.com'),
+    ),
+    ...
+)*/
         'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+            'identityCookie' => ['domain' => 'y2aa-backend.test', 'name' => '_identity', 'httpOnly' => true],
+        ],
+        'session' => [
+            // this is the name of the session cookie used for login on the backend
+            'name' => 'advanced-backend',
+        ],
+
+
+
+
+       /* 'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
@@ -24,7 +51,7 @@ return [
         'session' => [
             // this is the name of the session cookie used for login on the backend
             'name' => 'advanced-backend',
-        ],
+        ],*/
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -43,6 +70,7 @@ return [
             'rules' => [
             ],
         ],
+
     ],
     'params' => $params,
 ];
