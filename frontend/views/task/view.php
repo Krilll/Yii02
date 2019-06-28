@@ -6,11 +6,10 @@ use yii\grid\GridView;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Task */
+/* @var $model frontend\models\Task */
 /* @var $users boolean */
 /* @var $titleTwo string */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-/* @var $modelTwo \app\models\TaskUser */
 /* @var $icon \yii\bootstrap\Html */
 
 $this->title = $model->title;
@@ -37,7 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'title',
             'description:ntext',
             'creator_id',
@@ -47,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
 
-    if($users) {
+    /*if($users) {
 
     echo
     "<h2>".$titleTwo."</h2>".
@@ -87,9 +85,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); }
 
-
+*/
     ?>
-
-
 
 </div>

@@ -114,7 +114,7 @@ class TaskController extends \yii\web\Controller
         $model = $this->findModel($id);
 
 
-        if( $model->creator_id !==  Yii::$app->user->id &&
+       /* if( $model->creator_id !==  Yii::$app->user->id &&
             $model->getTaskUsers()->where(['user_id'=>\Yii::$app->user->id])->exists())
         {
             Yii::$app->session->setFlash('error', 'It is a stranger task');
@@ -137,12 +137,12 @@ class TaskController extends \yii\web\Controller
                 'dataProvider' => $dataProvider,
             ]);
         }
-
+*/
         return $this->render('view', [
             'model' => $model,
-            'titleTwo' => '',
-            'users' => false,
-            'dataProvider' => false,
+            //'titleTwo' => '',
+           // 'users' => false,
+          //  'dataProvider' => false,
         ]);
 
     }
