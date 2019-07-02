@@ -20,7 +20,9 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "dmstr/yii2-adminlte-asset": "2.6.2",
         "mohorev/yii2-upload-behavior": "*",
-        "yiisoft/yii2-imagine": "^2.0@dev"
+        "yiisoft/yii2-imagine": "^2.0@dev",
+        "composer/ca-bundle": "^1.0@dev",
+        "guzzlehttp/guzzle": "^6.3@dev"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
