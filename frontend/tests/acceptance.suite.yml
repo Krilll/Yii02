@@ -2,6 +2,12 @@ suite_namespace: frontend\tests\acceptance
 actor: AcceptanceTester
 modules:
     enabled:
-      - PhpBrowser:
-            url: http://y2aa-frontend.test/
+      #- PhpBrowser:
+       #   url: http://y2aa-frontend.test/
+      - WebDriver:
+          url: http://y2aa-frontend.test/
+          port: 9515
+          browser: chrome
+      - Yii2:
+          part: init
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f74967ea8f35d7bc354118c9e76100c2",
+    "content-hash": "84108e8a7c5df461b5b9869af2fa7fa2",
     "packages": [
         {
             "name": "almasaeed2010/adminlte",
@@ -648,6 +648,47 @@
                 "html"
             ],
             "time": "2018-02-23T01:58:20+00:00"
+        },
+        {
+            "name": "facebook/webdriver",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/facebook/php-webdriver.git",
+                "reference": "575600dfcfebad49fd0fc59d781b0696462a1f4e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/facebook/php-webdriver/zipball/575600dfcfebad49fd0fc59d781b0696462a1f4e",
+                "reference": "575600dfcfebad49fd0fc59d781b0696462a1f4e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.19"
+            },
+            "require-dev": {
+                "phpdocumentor/phpdocumentor": "2.*",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "A php client for WebDriver",
+            "homepage": "https://github.com/facebook/php-webdriver",
+            "keywords": [
+                "facebook",
+                "php",
+                "selenium",
+                "webdriver"
+            ],
+            "time": "2015-06-09T17:09:16+00:00"
         },
         {
             "name": "fortawesome/font-awesome",
@@ -4395,7 +4436,8 @@
     "stability-flags": {
         "yiisoft/yii2-imagine": 20,
         "composer/ca-bundle": 20,
-        "guzzlehttp/guzzle": 20
+        "guzzlehttp/guzzle": 20,
+        "facebook/webdriver": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
