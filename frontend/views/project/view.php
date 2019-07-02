@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Task */
+/* @var $model common\models\Project */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Tasks', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="task-view">
+<div class="project-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -32,15 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             'description:ntext',
-            'project_id',
-            'executor_id',
-            'started_id',
-            'completed_id',
+            'active',
             'creator_id',
             'updater_id',
             'created_at',
             'updated_at',
         ],
     ]) ?>
+
+
 
 </div>

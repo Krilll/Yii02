@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Task */
+/* @var $model common\models\Project */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="task-form">
+<div class="project-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -16,13 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'project_id')->textInput() ?>
-
-    <?= $form->field($model, 'executor_id')->textInput() ?>
-
-    <?= $form->field($model, 'started_id')->textInput() ?>
-
-    <?= $form->field($model, 'completed_id')->textInput() ?>
+    <?= $form->field($model, 'active')->textInput() ?>
 
     <?= $form->field($model, 'creator_id')->textInput() ?>
 

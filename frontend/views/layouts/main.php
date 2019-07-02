@@ -36,17 +36,10 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/task/index']],
-        ['label' => 'Create a task', 'url' => ['/task/create']],
-        ['label' => 'Tasks', 'url' => ['task/my']],
-        ['label' => 'Shared tasks', 'url' => ['/task/shared']],
-        ['label' => 'Accessed tasks', 'url' => ['/task/accessed']],
-
-        //['label' => 'Home', 'url' => ['/site/index']],
-        //['label' => 'About', 'url' => ['/site/about']],
-        //['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => 'Home', 'url' => ['/task/home']],
+        ['label' => 'About', 'url' => ['/site/about']],
+        ['label' => 'Tasks', 'url' => ['/task/index']],
     ];
-
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
