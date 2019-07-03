@@ -20,7 +20,12 @@ class TasksCest
         $I->click(['class' => 'btn-success']);
         $I->wait(2);
         $I->fillField('Title', 'Hello');
+        $I->wait(2);
         $I->fillField('Description', ' Vestibulum ante ipsum.');
+        $I->wait(2);
+        $I->fillField('Project ID', 1);
+        $I->wait(2);
+        $I->click(['class' => 'btn-success']);
         $I->wait(2);
     }
 }
