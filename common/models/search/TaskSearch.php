@@ -47,7 +47,7 @@ class TaskSearch extends Task
     public function rules()
     {
         return [
-            [['id', 'project_id', 'executor_id', 'started_id', 'completed_id', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'project_id', 'executor_id', 'deadline', 'completed_id', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
             [['title', 'description'], 'safe'],
             [['creator_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['creator_id' => 'id']],
             [['updater_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updater_id' => 'id']],
@@ -93,12 +93,14 @@ class TaskSearch extends Task
             'id' => $this->id,
             'project_id' => $this->project_id,
             'executor_id' => $this->executor_id,
-            'started_id' => $this->started_id,
+            //'started_id' => $this->started_id,
             'completed_id' => $this->completed_id,
             'creator_id' => $this->creator_id,
             'updater_id' => $this->updater_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'status' => $this->status,
+            'deadline' => $this->deadline,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

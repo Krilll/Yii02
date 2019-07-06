@@ -34,12 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'project_id',
             'executor_id',
-            'started_id',
             'completed_id',
-            'creator_id',
             'updater_id',
             'created_at',
             'updated_at',
+            'status',
+            'deadline'
         ],
     ]) ?>
 

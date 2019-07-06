@@ -16,12 +16,14 @@ use yii\db\ActiveRecord;
  * @property string $description
  * @property int $project_id
  * @property int $executor_id
- * @property int $started_id
  * @property int $completed_id
  * @property int $creator_id
  * @property int $updater_id
  * @property int $created_at
  * @property int $updated_at
+ * @property int $status
+ * @property int $deadline
+ *
  *
  * @property User $creator
  * @property User $executor
@@ -64,9 +66,9 @@ class Task extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description'], 'required'],
-            [['description'], 'string'],
-            [['creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
+            [['title', 'description', 'status', 'deadline'], 'required'],
+            [['description', 'status'], 'string'],
+            [['creator_id', 'updater_id', 'created_at', 'updated_at', 'deadline'], 'integer'],
             [['title'], 'string', 'max' => 255],
             [['creator_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['creator_id' => 'id']],
             [['updater_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updater_id' => 'id']],
@@ -85,12 +87,14 @@ class Task extends \yii\db\ActiveRecord
             'description' => 'Description',
             'project_id' => 'Project ID',
             'executor_id' => 'Executor ID',
-            'started_id' => 'Started ID',
+            //'started_id' => 'Started ID',
             'completed_id' => 'Completed ID',
             'creator_id' => 'Creator ID',
             'updater_id' => 'Updater ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'deadline' => 'Deadline',
+            'status' => 'Status',
         ];
     }
 
