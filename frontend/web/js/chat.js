@@ -1,9 +1,13 @@
 if (!window.WebSocket) {
     alert("Ваш браузер не поддерживает Веб-сокеты");
 }
-var websocketPort = wsPort ? wsPort : 8080,
-    conn = new WebSocket('ws://localhost:' + websocketPort),
-    idMessages = 'oldMessage';
+
+var webSocket = new WebSocket("ws://localhost:8080");
+conn = webSocket;
+var idMessages = 'oldMessage';
+//var websocketPort = wsPort ? wsPort : 8080,
+   // conn = new WebSocket('ws://localhost:' + websocketPort),
+   // idMessages = 'oldMessage';
 conn.onopen = function(e) {
     console.log("Connection established!");
 };

@@ -62,4 +62,3 @@ $this->params['breadcrumbs'][] = $this->title;
         <button type="submit" id = "addMessage">Add a message</button>
     </form>
 </div>
-<script src = "../../web/js/chat.js"></script>
