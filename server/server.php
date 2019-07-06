@@ -7,9 +7,11 @@ use Yii;
 //use Chat;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
+use frontend\assets\ChatAsset;
 
 include "Chat.php";
 include "vendor/autoload.php";
+
 
 $server = IoServer::factory(
     new Chat(), 8080
