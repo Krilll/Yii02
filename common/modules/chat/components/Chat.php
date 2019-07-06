@@ -1,11 +1,8 @@
 <?php
-namespace server;
-include "vendor/autoload.php";
 
-use Ratchet\ConnectionInterface;
+namespace common\modules\chat\components;
 use Ratchet\MessageComponentInterface;
-use Ratchet\WebSocket\WsConnection;
-
+use Ratchet\ConnectionInterface;
 
 class Chat implements MessageComponentInterface
 {
@@ -29,8 +26,8 @@ class Chat implements MessageComponentInterface
 
         foreach ($this->clients as $client) {
             //if ($from !== $client) {
-            // The sender is not the receiver, send to each client connected
-            $client->send($msg);
+                // The sender is not the receiver, send to each client connected
+                $client->send($msg);
             //}
         }
     }

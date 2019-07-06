@@ -8,15 +8,12 @@ use common\models\search\TaskSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use frontend\assets\ChatAsset;
 
 /**
  * TaskController implements the CRUD actions for Task model.
  */
 class TaskController extends Controller
 {
-    public $port = 8080;
-
     /**
      * {@inheritdoc}
      */
@@ -48,8 +45,6 @@ class TaskController extends Controller
      */
     public function actionIndex()
     {
-
-
         $searchModel = new TaskSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -67,7 +62,7 @@ class TaskController extends Controller
      */
     public function actionView($id)
     {
-        ChatAsset::register($this->view);
+        //ChatAsset::register($this->view);
         //$this->view->registerJsVar('wsPort', $this->port);
 
         return $this->render('view', [
