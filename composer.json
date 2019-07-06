@@ -23,7 +23,8 @@
         "yiisoft/yii2-imagine": "^2.0@dev",
         "composer/ca-bundle": "^1.0@dev",
         "guzzlehttp/guzzle": "^6.3@dev",
-        "facebook/webdriver": "1.0.2"
+        "facebook/webdriver": "1.0.2",
+        "cboden/ratchet": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
