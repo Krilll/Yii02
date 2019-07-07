@@ -2,7 +2,6 @@
     <div id="oldMessage">
     </div>
     <input type="button" id="newMessage" value="Write a message">
-
     <form id = "myForm" class="hidden">
         <label for = "author"> Login </label>
         <input type="text" id="author" required>

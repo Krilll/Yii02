@@ -33,6 +33,9 @@ class DefaultController extends Controller
             Yii::$app->params['chat.port']
         );
 
+       // $html = Yii::$app->request->absoluteUrl;
+        // $html;
+
         echo "Hello from Server!".PHP_EOL;
 //8080
         $server->run();

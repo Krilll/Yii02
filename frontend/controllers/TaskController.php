@@ -62,8 +62,21 @@ class TaskController extends Controller
      */
     public function actionView($id)
     {
-        //ChatAsset::register($this->view);
-        //$this->view->registerJsVar('wsPort', $this->port);
+        $title_task = (new \yii\db\Query())
+            ->select(['text'])
+            ->from('chat_user')
+            ->where(['task_id' => $id])
+        ->all();
+
+        $id_user = (new \yii\db\Query())
+            ->select(['username'])
+            ->from('user')
+            ->innerJoin('chat_user')
+            ->where(['task_id' => $id])
+            ->all();
+
+        print_r($title_task);
+        print_r($id_user);
 
         return $this->render('view', [
             'model' => $this->findModel($id),

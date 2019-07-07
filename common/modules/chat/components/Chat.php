@@ -1,8 +1,10 @@
 <?php
 
 namespace common\modules\chat\components;
+
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+use Yii;
 
 class Chat implements MessageComponentInterface
 {
@@ -16,10 +18,6 @@ class Chat implements MessageComponentInterface
         // Store the new connection to send messages to later
         $this->clients->attach($conn);
         echo "New connection! ({$conn->resourceId})\n";
-
-        
-
-
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {

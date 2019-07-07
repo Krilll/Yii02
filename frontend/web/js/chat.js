@@ -1,8 +1,14 @@
 var websocketPort = wsPort ? wsPort : 8080,
     conn = new WebSocket('ws://localhost:' + websocketPort),
     idMessages = 'oldMessage';
+
 conn.onopen = function(e) {
     console.log("Connection established!");
+
+    //var title = $(document.getElementsByTagName('h1')).html();
+
+
+    //console.log(title);
 };
 
 conn.onmessage = function(e) {
