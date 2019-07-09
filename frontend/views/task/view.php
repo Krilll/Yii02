@@ -2,10 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use yii\widgets\Pjax;
-
+use frontend\models\ChatUser;
 
 /* @var $this yii\web\View */
+/* @var @comments json old comments*/
 /* @var $model common\models\Task */
 
 $this->title = $model->title;
@@ -18,9 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?php Pjax::begin(); ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php Pjax::end(); ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -49,4 +47,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<?= common\modules\chat\widgets\WidgetChat::widget(['port' => Yii::$app->params['chat.port']]); ?>
+<?= common\modules\chat\widgets\WidgetChat::widget(//['port' => Yii::$app->params['chat.port']],
+   // ['comments' => ChatUser::getTasks($model['id'])]
+); ?>
+
+<script>
+    let oldComments = '<?=$comments?>';
+    //console.log(oldComments);
+</script>

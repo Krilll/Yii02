@@ -8,6 +8,7 @@ use common\models\search\TaskSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use frontend\models\ChatUser;
 
 /**
  * TaskController implements the CRUD actions for Task model.
@@ -62,24 +63,14 @@ class TaskController extends Controller
      */
     public function actionView($id)
     {
-        $title_task = (new \yii\db\Query())
-            ->select(['text'])
-            ->from('chat_user')
-            ->where(['task_id' => $id])
-        ->all();
+        $comments = ChatUser::getTasks($id);
 
-        $id_user = (new \yii\db\Query())
-            ->select(['username'])
-            ->from('user')
-            ->innerJoin('chat_user')
-            ->where(['task_id' => $id])
-            ->all();
-
-        print_r($title_task);
-        print_r($id_user);
+       // print_r($comments);
+        //print_r($id_user);
 
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'comments' => $comments,
         ]);
     }
 

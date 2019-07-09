@@ -5,9 +5,10 @@ var websocketPort = wsPort ? wsPort : 8080,
 conn.onopen = function(e) {
     console.log("Connection established!");
 
-    //var title = $(document.getElementsByTagName('h1')).html();
+    var oldParent = document.getElementById(oldMessage);
 
 
+    console.log(oldComments);
     //console.log(title);
 };
 

@@ -1,5 +1,6 @@
 <div class ="forum-main">
     <div id="oldMessage">
+
     </div>
     <input type="button" id="newMessage" value="Write a message">
     <form id = "myForm" class="hidden">

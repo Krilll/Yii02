@@ -21,9 +21,7 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        //require dirname(__DIR__) . '/vendor/autoload.php';
 
-       // $port =
         $server = IoServer::factory(
             new HttpServer(
                 new WsServer(
