@@ -5,11 +5,24 @@ var websocketPort = wsPort ? wsPort : 8080,
 conn.onopen = function(e) {
     console.log("Connection established!");
 
-    var oldParent = document.getElementById(oldMessage);
+    var oldParent = document.getElementById('oldMessage');
 
+    if(oldComments.length <= 2) {
+        console.log('no comments in database');
+    } else {
+        oldComments = $.parseJSON(oldComments);
+        for(var i in oldComments) {
 
-    console.log(oldComments);
-    //console.log(title);
+            let name = oldComments[i].username;
+            let text = oldComments[i].text;
+
+            var div = document.createElement('DIV');
+            $(div).addClass('forumMessage');
+            div = oldParent.appendChild(div);
+            div.innerHTML = name + ' : ' + text + '\n' ;
+        }
+    }
+
 };
 
 conn.onmessage = function(e) {
