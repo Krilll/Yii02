@@ -96,13 +96,13 @@ class ChatUser extends \yii\db\ActiveRecord
      */
     public function addMessage($task_id, $user_id, $text)
     {
-        Yii::$app->db->createCommand()
+        /*Yii::$app->db->createCommand()
             ->insert('chat_user',
             [
             'task_id'=> $task_id,
             'user_id'=> $user_id,
             'text'=> $text,
-        ]);
+        ]);*/
     }
 
 

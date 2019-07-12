@@ -24,7 +24,8 @@
         "composer/ca-bundle": "^1.0@dev",
         "guzzlehttp/guzzle": "^6.3@dev",
         "facebook/webdriver": "1.0.2",
-        "cboden/ratchet": "dev-master"
+        "cboden/ratchet": "dev-master",
+        "la-haute-societe/yii2-save-relations-behavior": "1.6.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
