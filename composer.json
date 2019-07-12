@@ -25,7 +25,8 @@
         "guzzlehttp/guzzle": "^6.3@dev",
         "facebook/webdriver": "1.0.2",
         "cboden/ratchet": "dev-master",
-        "la-haute-societe/yii2-save-relations-behavior": "1.6.0"
+        "la-haute-societe/yii2-save-relations-behavior": "1.6.0",
+        "sonko-dmitry/yii2-telegram-bot-api": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

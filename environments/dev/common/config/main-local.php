@@ -3,7 +3,7 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=127.0.0.1;dbname=yii2_task',
+            'dsn' => 'mysql:host=127.0.0.1:2222;dbname=yii2_task',
             'username' => 'root',
             'password' => '',
             'charset' => 'utf8',
@@ -15,6 +15,10 @@ return [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+        ],
+        'bot' => [
+            'class' => \SonkoDmitry\Yii\TelegramBot\Component::class,
+            'apiToken' => '850025964:AAGZKIV5QItRd_oMhnLdUtWTfULDzT-4zt4',
         ],
     ],
     'modules' => [
