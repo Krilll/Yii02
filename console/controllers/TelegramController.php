@@ -56,22 +56,45 @@ class TelegramController extends Controller
     }
 
     private function processCommand(Message $message){
-        $params = explode(" ",  $message->getText());
+        $params = explode(",",  $message->getText());
         $command = $params[0];
         $response = 'Unknown command';
         switch($command){
             case "/help":
                 $response = "Доступные команды: \n";
                 $response .= "/help - вывод списка комманд\n";
-                $response .= "/project_create #project_name# - создание нового проекта\n";
+                $response .= "/project_create,#project_title#, #project_description#, #project_creator#\n - создание нового проекта\n";
                 //$response .= "/task_create ##task_name## ##responcible## ##project## -созданпие таска\n";
                 $response .= "/sp_create  - подписка на оповещения о новых проектах\n";
                 break;
+
             case "/project_create":
-                $response = "Вы подписаны на оповещение о новых проектах: \n";
+
+                if(empty($params[1]) || empty($params[2]) || empty($params[3])) {
+                    $response = "Введите все параметры для создания задачи\n #project_title# #project_description# #project_creator#\n";
+                    break;
+                }
+
+                $title = $params[1];
+                $description = $params[2];
+                $creator = $params[3];
+
+                $user_id = Telegram::checkUser($creator);
+                if(empty($user_id)) {
+                    $response = "Вашего логина нет в базе данных\n";
+                    break;
+                }
+
+                $answer = Telegram::createProject($title, $description, $user_id['id']);
+                if(!$answer) {
+                    $response = "Создание вашего проекта завершилось крахом.";
+                    break;
+                }
+                $response = "Создание вашего проекта прошло успешно!";
                 break;
+
             case "/sp_create":
-                $response = "Вы подписаны на оповещение о новых проектах: \n";
+                $response = "Вы подписаны на оповещения о новых проектах!";
                 break;
         }
         $this->bot->sendMessage($message->getFrom()->getId(), $response);
