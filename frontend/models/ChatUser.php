@@ -2,9 +2,10 @@
 
 namespace frontend\models;
 
-//use Yii;
+use Yii;
 use common\models\Task;
 use common\models\User;
+//use yii;
 /**
  * This is the model class for table "chat_user".
  **/
@@ -85,5 +86,33 @@ class ChatUser extends \yii\db\ActiveRecord
             ->where(['chat_user.task_id' => $id]) ->all();
 
         return json_encode($name);
+    }
+
+    /**
+     * @param integer $task_id Task id
+     * @param integer $user_id User id
+     * @param string $text Message
+     * @throws
+     */
+    public function addMessage($task_id, $user_id, $text)
+    {
+        Yii::$app->db->createCommand()
+            ->insert('chat_user',
+            [
+            'task_id'=> $task_id,
+            'user_id'=> $user_id,
+            'text'=> $text,
+        ]);
+    }
+
+
+
+    /**
+     * @param integer $id Task id
+     * @return integer $id Task id
+     */
+    public function getId($id)
+    {
+        return $id;
     }
 }

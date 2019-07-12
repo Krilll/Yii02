@@ -4,11 +4,17 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\Task;
+use common\models\User;
 use common\models\search\TaskSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use frontend\models\ChatUser;
+
+
+use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * TaskController implements the CRUD actions for Task model.
@@ -65,12 +71,15 @@ class TaskController extends Controller
     {
         $comments = ChatUser::getTasks($id);
 
+
        // print_r($comments);
         //print_r($id_user);
 
         return $this->render('view', [
             'model' => $this->findModel($id),
             'comments' => $comments,
+            'userId' => Yii::$app->user->id,
+            'taskId' => $id
         ]);
     }
 

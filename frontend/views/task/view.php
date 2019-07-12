@@ -47,11 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<?= common\modules\chat\widgets\WidgetChat::widget(//['port' => Yii::$app->params['chat.port']],
-   // ['comments' => ChatUser::getTasks($model['id'])]
-); ?>
+<?= common\modules\chat\widgets\WidgetChat::widget(['port' => Yii::$app->params['chat.port']]); ?>
 
 <script>
     let oldComments = '<?=$comments?>';
-    //console.log(oldComments);
+    let userId = '<?=$userId?>';
+    let taskId = '<?=$taskId?>';
 </script>
