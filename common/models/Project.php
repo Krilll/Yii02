@@ -92,8 +92,8 @@ class Project extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['active', 'creator_id', 'updater_id', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 255],
-            [['creator_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['creator_id' => 'id']],
-            [['updater_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updater_id' => 'id']],
+           // [['creator_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['creator_id' => 'id']],
+           // [['updater_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updater_id' => 'id']],
 
             [['active'],'in','range' => self::STATUSES],
             ];
@@ -157,10 +157,10 @@ class Project extends \yii\db\ActiveRecord
      * {@inheritdoc}
      * @return \common\models\query\ProjectQuery the active query used by this AR class.
      */
-    public static function find()
-    {
-        return new \common\models\query\ProjectQuery(get_called_class());
-    }
+   // public static function find()
+    //{
+      //  return new \common\models\query\ProjectQuery(get_called_class());
+   // }
     /**
      * @return \yii\db\ActiveQuery
      */

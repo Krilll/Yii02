@@ -3,7 +3,10 @@
 
 namespace console\controllers;
 use common\models\Telegram;
+use common\models\TelegramSubscribe;
 use common\models\Project;
+use common\models\User;
+use common\models\MaxItems;
 use SonkoDmitry\Yii\TelegramBot\Component;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
@@ -14,7 +17,6 @@ class TelegramController extends Controller
     /** @var  Component */
     private $bot;
     private $offset = 0;
-    private $num_projects;
 
     public function init()
     {
@@ -58,54 +60,57 @@ class TelegramController extends Controller
     }
 
     private function processCommand(Message $message){
-        $params = explode(",",  $message->getText());
+        $params = explode(", ",  $message->getText());
         $command = $params[0];
-        $response = 'Unknown command';
-        switch($command){
-            case "/help":
-                $response = "Доступные команды: \n";
-                $response .= "/help - вывод списка комманд\n";
-                $response .= "/project_create,#project_title#, #project_description#, #project_creator#\n - создание нового проекта\n";
-                //$response .= "/task_create ##task_name## ##responcible## ##project## -созданпие таска\n";
-                $response .= "/sp_create  - подписка на оповещения о новых проектах\n";
-                break;
+        $response = "Unknown command.";
 
-            case "/project_create":
-
-                if(empty($params[1]) || empty($params[2]) || empty($params[3])) {
-                    $response = "Введите все параметры для создания задачи\n #project_title# #project_description# #project_creator#\n";
-                    break;
-                }
-
+        if($command === "/help") {
+            $response = Telegram::getHelpInformation();
+        } else if ($command === "/project_create") {
+            if(empty($params[1]) || empty($params[2]) || empty($params[3])) {
+                $response = "Введите все параметры для создания задачи\n project_title, project_description, project_creator\n";
+            } else {
                 $title = $params[1];
                 $description = $params[2];
                 $creator = $params[3];
 
-                $user_id = Telegram::checkUser($creator);
-                if(empty($user_id)) {
+                $user_id = User::find()
+                    ->select('id')
+                    ->where(['username' => $creator])
+                    ->one();
+
+                if(empty($user_id['id'])) {
                     $response = "Вашего логина нет в базе данных\n";
-                    break;
+                } else {
+
+                    /*$model = new Project([
+                        'title' => $title,
+                        'description' => $description,
+                        'creator_id'=> $user_id['id'],
+                    ]);*/
+
+                    $model = Telegram::createProject($title, $description, $user_id['id']);
+
+                    if($model) {
+                        $response = "Создание вашего проекта прошло успешно!";
+                    } else {
+                        $response = "Создание вашего проекта завершилось крахом.";
+                    }
                 }
+            }
+        } else if ($command === "/sp_create") {
+            $user_id = $message->getFrom()->getId();
 
-                $answer = Telegram::createProject($title, $description, $user_id['id']);
-                if(!$answer) {
-                    $response = "Создание вашего проекта завершилось крахом.";
-                    break;
-                }
-                $response = "Создание вашего проекта прошло успешно!";
-                break;
+            $model = new TelegramSubscribe([
+                'thing'=> TelegramSubscribe::CONST_PROJECT_CREATE,
+                'subs_telegram'=> $user_id,
+            ]);
 
-            case "/sp_create":
-                $user_id = $message->getFrom()->getId();
-
-                $answer = Telegram::createSubscribeProjects($user_id);
-                if(!$answer) {
-                    $response = "Подписка на оповещения о новых проектах не сработала.";
-                    break;
-                }
-
+            if($model->save()) {
                 $response = "Вы подписаны на оповещения о новых проектах!";
-                break;
+            } else {
+                $response = "Подписка на оповещения о новых проектах не сработала.";
+            }
         }
         $this->bot->sendMessage($message->getFrom()->getId(), $response);
     }
@@ -113,36 +118,39 @@ class TelegramController extends Controller
 
     public function actionProjects()
     {
-        //$num_projects['max_id'] = 3;
-        $num_projects = (new \yii\db\Query())
-            ->select(['max_id'])
-            ->from('max_items')
-            ->where(['title' => 'projects'])
-            ->one();
-        $projects = Telegram::checkProjects();
         $response = "";
+        $num_projects = MaxItems::find()
+            ->select('max_id')
+            ->where(['title' => TelegramSubscribe::CONST_PROJECT_CREATE])
+            ->one();
+
+        $projects = Project::find()
+            ->select('id')
+            ->max('id');
 
         if($projects > $num_projects['max_id']){
             $num = $projects - $num_projects['max_id'];
             $title =  Project::find()
-                    ->select('title')
-                    ->orderBy([
-                        'id' => SORT_DESC])->limit($num)->all();
+                ->select('title')
+                ->orderBy(['id' => SORT_DESC])
+                ->limit($num)
+                ->all();
             foreach ($title as $name){
                 $response .= "Создан новый проект " . $name['title'] . "!\n";
             }
 
-            (new \yii\db\Query())
-                ->createCommand()
-                ->update('max_items',
-                    ['max_id' => $projects], 'title = "projects"')
-                    ->execute();
-            $response .= "Новых проектов: " . ($projects - $num_projects['max_id']) . PHP_EOL;
+            MaxItems::updateAll(['max_id' => $projects],
+                ['title' => TelegramSubscribe::CONST_PROJECT_CREATE]);
+
+            $response .= "Новых проектов: " . ($num) . PHP_EOL;
         } else {
             $response .= "Новых проектов нет" . PHP_EOL;
         }
 
-        $people = Telegram::checkSubscribeProjects();
+        $people = TelegramSubscribe::find()
+            ->select(['subs_telegram'])
+            ->where(['thing' => 'projects'])
+            ->all();
 
         if($people){
             foreach ($people as $man){

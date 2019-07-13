@@ -46,22 +46,19 @@ class Telegram extends \yii\db\ActiveRecord
     }
 
     /**
-     * @param string $name Username
-     * @return \yii\db\ActiveQuery
-     */
-    public function checkUser($name) {
-        //$id = User::find()
-          //  ->select('id')
-           // ->where(['username' => $name])
-       // ->one();
-        $id = (new \yii\db\Query())
-            ->select(['id'])
-            ->from('user')
-            ->where(['username' => $name])
-            ->one();
+     * write help information
+     * @return string
+     * */
+    public function getHelpInformation() {
+        $response = "Доступные команды: \n";
+        $response .= "/help - вывод списка комманд\n";
+        $response .= "/project_create, project_title, project_description#, project_creator\n - создание нового проекта\n";
+        //$response .= "/task_create ##task_name## ##responcible## ##project## -созданпие таска\n";
+        $response .= "/sp_create - подписка на оповещения о новых проектах\n";
 
-        return $id;
+        return $response;
     }
+
 
     /**
      * @param string $title
@@ -80,46 +77,5 @@ class Telegram extends \yii\db\ActiveRecord
                 ])->execute();
 
         return true;
-    }
-
-    /**
-     * @param int $user_id Telegram id
-     * @throws
-     * @return string
-     */
-    public function createSubscribeProjects($user_id) {
-        Yii::$app->db->createCommand()
-            ->insert('telegram_subscribe',
-                [
-                    'thing'=> 'projects',
-                    'subs_telegram'=> $user_id,
-                ])->execute();
-
-        return true;
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function checkProjects() {
-        $id = Project::find()
-            ->select('id')
-            ->max('id');
-
-        return $id;
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function checkSubscribeProjects() {
-        $id = (new \yii\db\Query())
-            ->select(['subs_telegram'])
-            ->from('telegram_subscribe')
-            ->where(['thing' => 'projects'])
-            ->orWhere(['thing' => 'all'])
-            ->all();
-
-        return $id;
     }
 }
