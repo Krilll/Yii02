@@ -50,14 +50,15 @@ class Telegram extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
     public function checkUser($name) {
-        $id = User::find()
-            ->select('id')
-            ->where(['username' => $name]);
-        /*$id = (new \yii\db\Query())
+        //$id = User::find()
+          //  ->select('id')
+           // ->where(['username' => $name])
+       // ->one();
+        $id = (new \yii\db\Query())
             ->select(['id'])
             ->from('user')
             ->where(['username' => $name])
-            ->one();*/
+            ->one();
 
         return $id;
     }

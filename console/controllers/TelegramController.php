@@ -3,6 +3,7 @@
 
 namespace console\controllers;
 use common\models\Telegram;
+use common\models\Project;
 use SonkoDmitry\Yii\TelegramBot\Component;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
@@ -13,7 +14,7 @@ class TelegramController extends Controller
     /** @var  Component */
     private $bot;
     private $offset = 0;
-    private $num_projects = 0;
+    private $num_projects;
 
     public function init()
     {
@@ -112,25 +113,42 @@ class TelegramController extends Controller
 
     public function actionProjects()
     {
-        $new_num_projects =  Telegram::checkProjects();
+        //$num_projects['max_id'] = 3;
+        $num_projects = (new \yii\db\Query())
+            ->select(['max_id'])
+            ->from('max_items')
+            ->where(['title' => 'projects'])
+            ->one();
+        $projects = Telegram::checkProjects();
+        $response = "";
 
-        if($this->num_projects < $new_num_projects) {
-          //$num = $new_num_projects - $this->num_projects;
-          $subscribes = Telegram::checkSubscribeProjects();
+        if($projects > $num_projects['max_id']){
+            $num = $projects - $num_projects['max_id'];
+            $title =  Project::find()
+                    ->select('title')
+                    ->orderBy([
+                        'id' => SORT_DESC])->limit($num)->all();
+            foreach ($title as $name){
+                $response .= "Создан новый проект " . $name['title'] . "!\n";
+            }
 
-           // $id = Project::find()
-               // ->select('id')
-                //->max('id');
-
-          if(!empty($subscribes)) {
-              foreach ($subscribes as $subscribe){
-                  $response = "Создан проект" ;
-              }
-          }
-
-          $this->num_projects = $new_num_projects;
+            (new \yii\db\Query())
+                ->createCommand()
+                ->update('max_items',
+                    ['max_id' => $projects], 'title = "projects"')
+                    ->execute();
+            $response .= "Новых проектов: " . ($projects - $num_projects['max_id']) . PHP_EOL;
         } else {
-            echo "Новых проектов нет" . PHP_EOL;
+            $response .= "Новых проектов нет" . PHP_EOL;
         }
+
+        $people = Telegram::checkSubscribeProjects();
+
+        if($people){
+            foreach ($people as $man){
+                $this->bot->sendMessage($man['subs_telegram'], $response);
+            }
+        }
+        echo $response;
     }
 }
