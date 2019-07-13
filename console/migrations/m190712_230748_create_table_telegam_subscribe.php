@@ -7,12 +7,13 @@ use yii\db\Migration;
  */
 class m190712_230748_create_table_telegam_subscribe extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
     public function safeUp()
     {
-
+        $this->createTable('telegram_subscribe', [
+            'id' => $this->primaryKey(),
+            'thing' => "enum('tasks', 'projects', 'all')",
+            'subs_telegram' => $this->integer()->notNull()
+        ]);
     }
 
     /**
@@ -20,23 +21,6 @@ class m190712_230748_create_table_telegam_subscribe extends Migration
      */
     public function safeDown()
     {
-        echo "m190712_230748_create_table_telegam_subscribe cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('telegram_subscribe');
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m190712_230748_create_table_telegam_subscribe cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }

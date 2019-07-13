@@ -13,6 +13,7 @@ class TelegramController extends Controller
     /** @var  Component */
     private $bot;
     private $offset = 0;
+    private $num_projects = 0;
 
     public function init()
     {
@@ -94,10 +95,42 @@ class TelegramController extends Controller
                 break;
 
             case "/sp_create":
+                $user_id = $message->getFrom()->getId();
+
+                $answer = Telegram::createSubscribeProjects($user_id);
+                if(!$answer) {
+                    $response = "Подписка на оповещения о новых проектах не сработала.";
+                    break;
+                }
+
                 $response = "Вы подписаны на оповещения о новых проектах!";
                 break;
         }
         $this->bot->sendMessage($message->getFrom()->getId(), $response);
     }
 
+
+    public function actionProjects()
+    {
+        $new_num_projects =  Telegram::checkProjects();
+
+        if($this->num_projects < $new_num_projects) {
+          //$num = $new_num_projects - $this->num_projects;
+          $subscribes = Telegram::checkSubscribeProjects();
+
+           // $id = Project::find()
+               // ->select('id')
+                //->max('id');
+
+          if(!empty($subscribes)) {
+              foreach ($subscribes as $subscribe){
+                  $response = "Создан проект" ;
+              }
+          }
+
+          $this->num_projects = $new_num_projects;
+        } else {
+            echo "Новых проектов нет" . PHP_EOL;
+        }
+    }
 }

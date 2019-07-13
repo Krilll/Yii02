@@ -20,7 +20,7 @@ class m190712_183151_create_table_project extends Migration
             'creator_id' => $this->integer()->notNull(),
             'updater_id' => $this->integer()->null(),
             'created_at' => $this->integer()->null(),
-            'updated_at' => $this->integer()->null(),
+            'updated_at' => $this->integer()->null()
         ]);
 
         // add foreign key for field `creator_id`
