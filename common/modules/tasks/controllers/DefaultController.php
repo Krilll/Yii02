@@ -3,6 +3,7 @@
 namespace common\modules\tasks\controllers;
 
 use common\models\Task;
+use common\models\User;
 use yii\data\ActiveDataProvider;
 use yii\filters\auth\HttpBasicAuth;
 use yii\rest\ActiveController;
@@ -14,21 +15,21 @@ class DefaultController extends ActiveController
 {
     public $modelClass = Task::class;
 
-    //public function behaviors()
-  //  {
-        //$behaviors = parent::behaviors();
-        //$behaviors['authentificator'] = [
-        //'class' => HttpBasicAuth::class,
-        // 'auth' => function($username, $password){
-        //   $user = User::findByUsername($username);
-        ///  if($user !== null && $user->validatePassword($password)){
-        //      return $user;
-        // }
-        //  return null;
-        //  }
-        // ];
-        // retu
-   // }
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+        $behaviors['authentificator'] = [
+        'class' => HttpBasicAuth::class,
+         'auth' => function($username, $password){
+           $user = User::findByUsername($username);
+          if($user !== null && $user->validatePassword($password)){
+              return $user;
+         }
+          return null;
+          }
+         ];
+         return $behaviors;
+    }
 
     public function actions()
     {
@@ -50,6 +51,16 @@ class DefaultController extends ActiveController
         return new ActiveDataProvider([
             'query' => $query
         ]);
+    }
 
+    /**
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 }
