@@ -2,19 +2,21 @@
 
 namespace common\modules\tasks\controllers;
 
-use yii\web\Controller;
 use common\models\Task;
 use yii\data\ActiveDataProvider;
+use yii\filters\auth\HttpBasicAuth;
+use yii\rest\ActiveController;
 
 /**
  * Default controller for the `tasks` module
  */
-class DefaultController extends Controller
+class DefaultController extends ActiveController
 {
+    public $modelClass = Task::class;
 
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
+    //public function behaviors()
+  //  {
+        //$behaviors = parent::behaviors();
         //$behaviors['authentificator'] = [
         //'class' => HttpBasicAuth::class,
         // 'auth' => function($username, $password){
@@ -26,7 +28,7 @@ class DefaultController extends Controller
         //  }
         // ];
         // retu
-    }
+   // }
 
     public function actions()
     {
@@ -37,16 +39,17 @@ class DefaultController extends Controller
 
     /**
      * Renders the index view for the module
+     * http://y2aa-frontend.test/tasks/default/index
      * @return string
      */
     public function actionIndex()
     {
-
+        //return $this->render('index');
         $query = Task::find();
 
         return new ActiveDataProvider([
             'query' => $query
         ]);
-    }
 
+    }
 }
