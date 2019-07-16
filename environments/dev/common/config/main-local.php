@@ -20,10 +20,18 @@ return [
             'class' => \SonkoDmitry\Yii\TelegramBot\Component::class,
             'apiToken' => '850025964:AAGZKIV5QItRd_oMhnLdUtWTfULDzT-4zt4',
         ],
+        'request' => [
+            'parsers' => [
+                'application/json' => \yii\web\JsonParser::class,
+            ]
+        ],
     ],
     'modules' => [
         'chat' => [
             'class' => 'common\modules\chat\Module',
+        ],
+        'tasks' => [
+            'class' => 'common\modules\tasks\Module',
         ],
     ],
 ];
