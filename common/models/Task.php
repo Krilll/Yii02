@@ -7,6 +7,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use yii\db\ActiveRecord;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "task".
@@ -128,7 +129,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public static function find()
     {
-        return new \common\models\query\TaskQuery(get_called_class());
+        return new query\TaskQuery(get_called_class());
     }
     /**
      * @return \yii\db\ActiveQuery

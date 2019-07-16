@@ -45,22 +45,10 @@ class DefaultController extends ActiveController
      */
     public function actionIndex()
     {
-        //return $this->render('index');
-        $query = Task::find();
+        $query = $this->modelClass::find()->where('project_id=:id', [':id' => $_GET['project_id']]);
 
         return new ActiveDataProvider([
             'query' => $query
         ]);
-    }
-
-    /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 }
