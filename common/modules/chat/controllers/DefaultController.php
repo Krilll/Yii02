@@ -8,6 +8,10 @@ use Ratchet\Server\IoServer;
 use common\modules\chat\components\Chat;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
+//use yii\data\ActiveDataProvider;
+//use yii\filters\auth\HttpBasicAuth;
+//use yii\rest\ActiveController;
+
 include 'vendor/autoload.php';
 
 /**
@@ -15,6 +19,8 @@ include 'vendor/autoload.php';
  */
 class DefaultController extends Controller
 {
+
+
     /**
      * Renders the index view for the module
      * @return string
@@ -31,7 +37,7 @@ class DefaultController extends Controller
             Yii::$app->params['chat.port']
         );
 
-       // $html = Yii::$app->request->absoluteUrl;
+        //$html = Yii::$app->request->absoluteUrl;
         // $html;
 
         echo "Hello from Server!".PHP_EOL;

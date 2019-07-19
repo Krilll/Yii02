@@ -92,20 +92,21 @@ class ChatUser extends \yii\db\ActiveRecord
      * @param integer $task_id Task id
      * @param integer $user_id User id
      * @param string $text Message
-     * @throws
+     * @return string
      */
     public function addMessage($task_id, $user_id, $text)
     {
-        /*Yii::$app->db->createCommand()
-            ->insert('chat_user',
-            [
-            'task_id'=> $task_id,
-            'user_id'=> $user_id,
-            'text'=> $text,
-        ]);*/
+        $chat = new ChatUser();
+        $chat->task_id = $task_id;
+        $chat->user_id = $user_id;
+        $chat->text = $text;
+
+        if($chat->save()) {
+            return 'Message save';
+        } else {
+            return 'Message not save';
+        }
     }
-
-
 
     /**
      * @param integer $id Task id

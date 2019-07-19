@@ -4,7 +4,11 @@ namespace common\modules\chat\components;
 
 use Ratchet\MessageComponentInterface;
 use Ratchet\ConnectionInterface;
+
+use Ratchet\Http\HttpServer;
+use Ratchet\WebSocket\WsServer;
 use frontend\models\ChatUser;
+use common\models\User;
 use yii\db\Query;
 use Yii;
 
@@ -20,12 +24,6 @@ class Chat implements MessageComponentInterface
         // Store the new connection to send messages to later
         $this->clients->attach($conn);
         echo "New connection! ({$conn->resourceId})\n";
-
-
-        //$querystring = $conn->httpRequest->getUri()->getQuery();
-        //parse_str($querystring,$hello);
-
-        //print_r($hello);
     }
 
     public function onMessage(ConnectionInterface $from, $msg) {
@@ -37,30 +35,24 @@ class Chat implements MessageComponentInterface
         $message = json_decode($msg);
         $text = $message->text;
         $user_id = $message->user_id;
+        $user_name = User::findById($user_id);
+        $message->username = $user_name->username;
 
-        ChatUser::addMessage($task_id, $user_id, $text);
-        //$text = $array_message['text'];
-        //echo sprintf("\n");
-        //print_r($array_message);
-        //print_r("\n" .$user_id. "vvv" . "\n");
+        $msg = json_encode($message);
+
+        $array_message = ChatUser::addMessage($task_id, $user_id, $text);
+        print_r($array_message);
 
 
+        foreach ($this->clients as $client) {
+            $client_query_task_id = $client->httpRequest->getUri()->getQuery();
+            parse_str($client_query_task_id,$client_array_task_id);
+            $client_task_id = $client_array_task_id['id_task'];
 
-        //echo sprintf($hello . "\n");
-
-       // $numRecv = count($this->clients) - 1;
-        //echo sprintf('Connection %d sending message "%s" to %d other connection%s' . "\n"
-           // , $from->resourceId, $msg, $numRecv, $numRecv == 1 ? '' : 's');
-
-      //  foreach ($this->clients as $client) {
-            //if($client->taskId === $from->taskId) {
-               // $client->send($msg);
-           // }
-            //if ($from !== $client) {
-                // The sender is not the receiver, send to each client connected
-              //  $client->send($msg);
-            //}
-       // }
+            if($client_task_id === $task_id) {
+                $client->send($msg);
+            }
+        }
     }
 
     public function onClose(ConnectionInterface $conn) {

@@ -3,9 +3,8 @@
  * */
 
 var websocketPort = wsPort ? wsPort : 8080,
-    conn = new WebSocket('ws://localhost:' + websocketPort + '?id_task=' + taskId),
+    conn = new WebSocket('ws://192.168.83.137:' + websocketPort + '?id_task=' + taskId),
     idMessages = 'oldMessage';
-// +var webSocket = new WebSocket("ws://front.task.local:8080?channel=" + channel);
 
 var oldParent = document.getElementById('oldMessage');
 
@@ -36,7 +35,9 @@ conn.onmessage = function(e) {
     var div = document.createElement('DIV');
     $(div).addClass('forumMessage');
     div = parent.appendChild(div);
-    div.innerHTML = e.data + '\n' ;
+    var message = $.parseJSON(e.data);
+
+    div.innerHTML = message.username + ' : ' + message.text + '\n' ;
 };
 
 document.getElementById('newMessage').onclick =
@@ -59,17 +60,6 @@ document.getElementById('addMessage').onclick =
         } else {
             alert ('Зарегистрируйтесь для отправки сообщений в чате!');
         }
-        //document.getElementById("chat_form")
-           // .addEventListener("submit", function (event) {
-            //   event.preventDefault();
-              //  var data = {
-                //    message : this.message.value,
-               //     user_id : this.user_id.value,
-                //    channel : this.channel.value
-               // };
-
-              //  webSocket.send(JSON.stringify(data));
-             //   return false;
         $(text).val("");
         $(document.getElementById('myForm')).addClass('hidden');
         $(document.getElementById('newMessage')).removeClass('hidden');
