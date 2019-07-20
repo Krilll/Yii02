@@ -1,0 +1,8 @@
+total=518 N0=518
+file=64 N0=64
+anon=27 N0=27
+unevictable=427 N0=427
+hierarchical_total=518 N0=518
+hierarchical_file=64 N0=64
+hierarchical_anon=27 N0=27
+hierarchical_unevictable=427 N0=427

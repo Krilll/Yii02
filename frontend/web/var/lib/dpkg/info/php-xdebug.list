@@ -1,0 +1,16 @@
+/.
+/etc
+/etc/php
+/etc/php/7.0
+/etc/php/7.0/mods-available
+/etc/php/7.0/mods-available/xdebug.ini
+/usr
+/usr/lib
+/usr/lib/php
+/usr/lib/php/20151012
+/usr/lib/php/20151012/xdebug.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/php-xdebug
+/usr/share/doc/php-xdebug/changelog.Debian.gz
+/usr/share/doc/php-xdebug/copyright

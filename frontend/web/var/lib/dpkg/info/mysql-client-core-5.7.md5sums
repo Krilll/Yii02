@@ -1,0 +1,8 @@
+ebd0b77e1f8087a0b0fa7e15ffe8e033  usr/bin/mysql
+0c8d1e4b3246a73d3911d7f621f294cd  usr/bin/mysql_embedded
+6d4ab92e5937f79ab0b8b415f4a7bbc2  usr/bin/mysqlcheck
+c4682c09c57cad4e8ab932272638603e  usr/share/doc/mysql-client-core-5.7/NEWS.Debian.gz
+c90afa167bb7b1a2cb4211091a59590d  usr/share/doc/mysql-client-core-5.7/changelog.Debian.gz
+4765d3a947e72b4b8cacd66ecaf4eb7c  usr/share/doc/mysql-client-core-5.7/copyright
+8dccea936ea1ffa29816fe4459b56334  usr/share/man/man1/mysql.1.gz
+11103a165ebf3aaf8d2d5fa0767747a7  usr/share/man/man1/mysqlcheck.1.gz

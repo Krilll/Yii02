@@ -1,0 +1,9 @@
+auto
+/usr/bin/phpize
+phpize.1.gz
+/usr/share/man/man1/phpize.1.gz
+
+/usr/bin/phpize7.0
+70
+/usr/share/man/man1/phpize7.0.1.gz
+

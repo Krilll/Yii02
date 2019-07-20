@@ -1,0 +1,5 @@
+7d774c960b3e857065f805cef922f05c  usr/lib/php/20151012/intl.so
+7074ef4e0110909dc8c05ebd7ddf9921  usr/share/bug/php7.0-intl/control
+2ebbd8911c1f50cf288e9978f4fff03a  usr/share/bug/php7.0-intl/script
+1c156f49eeed10a7d70ac02db08d7aa4  usr/share/lintian/overrides/php7.0-intl
+66dd72756634f83008541a4d4bce2342  usr/share/php7.0-intl/intl/intl.ini

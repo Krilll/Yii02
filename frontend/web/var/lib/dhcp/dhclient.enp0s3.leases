@@ -1,0 +1,15 @@
+lease {
+  interface "enp0s3";
+  fixed-address 10.0.2.15;
+  filename "ubuntu-16.04-amd64.pxe";
+  option subnet-mask 255.255.255.0;
+  option dhcp-lease-time 86400;
+  option routers 10.0.2.2;
+  option dhcp-message-type 5;
+  option dhcp-server-identifier 10.0.2.2;
+  option domain-name-servers 192.168.86.1;
+  option domain-name "lan";
+  renew 6 2018/12/29 05:21:06;
+  rebind 6 2018/12/29 15:39:13;
+  expire 6 2018/12/29 18:39:13;
+}

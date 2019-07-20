@@ -1,0 +1,8 @@
+total=230 N0=230
+file=144 N0=144
+anon=86 N0=86
+unevictable=0 N0=0
+hierarchical_total=230 N0=230
+hierarchical_file=144 N0=144
+hierarchical_anon=86 N0=86
+hierarchical_unevictable=0 N0=0

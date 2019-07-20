@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/lib
+/usr/lib/libxmlsec1-openssl.so.1.2.20
+/usr/share
+/usr/share/doc
+/usr/share/doc/libxmlsec1-openssl
+/usr/share/doc/libxmlsec1-openssl/copyright
+/usr/lib/libxmlsec1-openssl.so.1
+/usr/share/doc/libxmlsec1-openssl/changelog.Debian.gz
+/usr/share/doc/libxmlsec1-openssl/README.Debian
+/usr/share/doc/libxmlsec1-openssl/README
+/usr/share/doc/libxmlsec1-openssl/TODO.Debian

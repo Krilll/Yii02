@@ -1,0 +1,8 @@
+total=116425 N0=116425
+file=111970 N0=111970
+anon=4455 N0=4455
+unevictable=0 N0=0
+hierarchical_total=116425 N0=116425
+hierarchical_file=111970 N0=111970
+hierarchical_anon=4455 N0=4455
+hierarchical_unevictable=0 N0=0

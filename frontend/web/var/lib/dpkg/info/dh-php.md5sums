@@ -1,0 +1,8 @@
+86ba79c434beba0a8b24790fd3d0a180  usr/bin/dh_php
+d09eb6d129f7906b0813ce7594bc3ea7  usr/share/debhelper/autoscripts/postinst-php
+fb28f0bf05dce78f04d2c3f86e920cf7  usr/share/debhelper/autoscripts/postrm-php
+c17ce17c7b13968a3ea466ba4fcbb93c  usr/share/debhelper/autoscripts/preinst-php
+4da5dfb8bb6c481233197a2213b3dc40  usr/share/debhelper/autoscripts/prerm-php
+d6c060ef9ca895ad01ada34841e11918  usr/share/doc/dh-php/changelog.gz
+9a85e3ff4adcb0b9daf04415d81ca4f8  usr/share/doc/dh-php/copyright
+547d511e8ad025160e32af2dc6ebb041  usr/share/perl5/Debian/Debhelper/Sequence/php.pm
